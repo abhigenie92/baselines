@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-
+import sys
+#sys.path.insert(1,'/Users/abhishek/Dropbox/projects/jaan_blei/code/latest_ppo/src/')
 from mpi4py import MPI
 from baselines.common import set_global_seeds
 from baselines import bench
@@ -23,8 +23,7 @@ def train(env_id, num_timesteps, seed):
     env = make_atari(env_id)
     def policy_fn(name, ob_space, ac_space): #pylint: disable=W0613
         return cnn_policy.CnnPolicy(name=name, ob_space=ob_space, ac_space=ac_space)
-    env = bench.Monitor(env, logger.get_dir() and
-        osp.join(logger.get_dir(), str(rank)))
+    env = bench.Monitor(env, logger.get_dir() and logger.get_dir())
     env.seed(workerseed)
     gym.logger.setLevel(logging.WARN)
 
